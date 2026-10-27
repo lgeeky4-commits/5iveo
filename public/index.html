@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f7f8f7">
+  <meta name="description" content="A minimal shared room with fifty file slots for ten people.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/app.css">
+  <script src="/app.js" defer></script>
+  <title>FIFTY — File Room</title>
+</head>
+<body>
+  <div id="room" class="room" hidden>
+    <header class="header">
+      <div class="logo-wrap"><span class="logo">50<span class="logo-dot">.</span></span><div class="logo-description">FILE ROOM<span>ONE SHARED SPACE</span></div></div>
+      <div class="header-right">
+        <div class="online-indicator"><span id="liveDot" class="live-dot"></span><span id="onlineLabel">0 / 10 online</span></div>
+        <button id="leaveBtn" class="text-button" type="button">Leave</button>
+      </div>
+    </header>
+    <main>
+      <div class="intro">
+        <div><div class="eyebrow">YOUR SHARED FILES</div><h1>Everything in its place<span class="period">.</span></h1><p>50 slots. One file per slot. Changes appear for everyone.</p></div>
+        <div class="progress-box"><span id="usedCount" class="large-count">0<span>/50</span></span><small>SLOTS FILLED</small><div class="progress-track"><div id="usedProgress"></div></div></div>
+      </div>
+      <div class="toolbar">
+        <label class="search-box" for="search"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><input id="search" type="search" placeholder="Search slots or files" autocomplete="off"></label>
+        <div class="toolbar-right"><span id="userLabel">JOINED</span><span class="midpoint">·</span><span>MAX 20 MB PER FILE</span></div>
+      </div>
+      <div class="list-head"><span>THE FILES</span><span id="visibleCount">50 SLOTS</span></div>
+      <div id="slots" class="slots" aria-live="off"></div>
+      <div id="emptySearch" class="no-results" hidden>No matching slots.</div>
+      <footer>Simple by design. Shared with everyone in the room.</footer>
+    </main>
+  </div>
+
+  <div id="joinOverlay" class="join-overlay">
+    <form id="joinForm" class="join-card">
+      <span class="join-logo">50<span>.</span></span>
+      <p class="eyebrow">PRIVATE WORKSPACE <span class="tiny-dot">●</span> 10 PLACES</p>
+      <h2>One room.<br>Fifty slots.</h2>
+      <p class="join-description">Drop in your files, name each slot, and share them live with up to 10 people.</p>
+      <label for="joinName">YOUR NAME</label>
+      <input id="joinName" name="name" maxlength="24" autocomplete="nickname" placeholder="Enter your name" required minlength="2">
+      <div id="passcodeWrap" hidden><label for="passcode">ROOM PASSCODE</label><input id="passcode" name="passcode" type="password" autocomplete="current-password" placeholder="Enter passcode"></div>
+      <button id="joinBtn" class="primary-button" type="submit">ENTER THE ROOM <span>↗</span></button>
+      <div id="joinError" class="error-message" role="alert"></div>
+      <div class="join-footer">No account needed. All slots are shared.</div>
+    </form>
+  </div>
+
+  <dialog id="editDialog" class="edit-dialog">
+    <form id="editForm">
+      <div class="modal-header"><div><span id="editNumber" class="eyebrow">SLOT 01</span><h2>Edit names</h2></div><button id="closeEdit" class="icon-close" type="button" aria-label="Close">×</button></div>
+      <label for="slotName">SLOT NAME</label>
+      <input id="slotName" maxlength="60" placeholder="Example: Vehicle Photos">
+      <small class="input-help">Leave blank to use the default slot name.</small>
+      <div id="fileNameFields"><label for="fileName">FILE NAME</label><input id="fileName" maxlength="180" placeholder="Example: report.pdf"><small class="input-help">Changes the download filename, not the file itself.</small></div>
+      <div id="editError" class="error-message" role="alert"></div>
+      <div class="modal-buttons"><button id="cancelEdit" type="button" class="secondary-button">Cancel</button><button id="saveEdit" class="primary-button" type="submit">SAVE CHANGES</button></div>
+      <button id="deleteFileBtn" type="button" class="delete-button" hidden>Remove file from this slot</button>
+    </form>
+  </dialog>
+
+  <input id="filePicker" type="file" hidden>
+  <div id="uploadProgress" class="upload-progress" role="status" hidden><div class="upload-title"><span id="uploadText">Uploading…</span><span id="uploadPercent">0%</span></div><div class="progress-track"><div id="uploadBar"></div></div></div>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

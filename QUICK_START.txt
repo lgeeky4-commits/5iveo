@@ -1,0 +1,23 @@
+FIFTY FILE ROOM
+================
+
+50 shared file slots / up to 10 people online / rename / upload / download
+
+DEPLOY TO RENDER
+1. Unzip and upload the contents to a new GitHub repository.
+2. Render > New Web Service > select your GitHub repository.
+3. Start command: npm start
+4. Open the Render website link on each phone.
+
+IMPORTANT FOR SAVING FILES
+Render's default disk storage is temporary. Use a persistent disk
+(when supported on your Render plan) mounted at /var/data,
+with environment variable DATA_DIR=/var/data.
+Otherwise uploaded files can disappear when Render restarts the app.
+
+OPTIONAL PASSCODE
+Set the Render environment variable ROOM_PASSCODE to a secret passcode.
+
+Default maximum is 20 MB per file. To change, set MAX_FILE_MB.
+
+The room is collaborative: anyone who joins can edit every slot.

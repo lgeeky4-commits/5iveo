@@ -1,0 +1,14 @@
+{
+  "name": "fifty-file-room",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Minimal live file room with 50 shared file slots for up to 10 concurrent participants",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js && node --check public/app.js"
+  },
+  "dependencies": {}
+}
